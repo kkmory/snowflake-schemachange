@@ -23,7 +23,7 @@ jobs:
         env:
           SF_PRIVATE_KEY: ${{ secrets.SF_PRIVATE_KEY }}
         run: |
-            echo $SF_PRIVATE_KEY >> /tmp/sf_key
+            echo $SF_PRIVATE_KEY >> /tmp/rsa_key.p8
 
       - name: Run schemachange
         env:
@@ -32,11 +32,15 @@ jobs:
           SF_ROLE: ${{ secrets.SF_ROLE }}
           SF_WAREHOUSE: ${{ secrets.SF_WAREHOUSE }}
           SF_DATABASE: "SCHAMACHANGE_DEMO"
-          SNOWFLAKE_PRIVATE_KEY_PATH: "/tmp/sf_key"
+          SNOWFLAKE_PRIVATE_KEY_PATH: "/tmp/rsa_key.p8"
           SNOWFLAKE_PRIVATE_KEY_PASSPHRASE: ${{ secrets.SF_PRIVATE_KEY_PASS }}
         run: |
           echo "GITHUB_WORKSPACE: $GITHUB_WORKSPACE"
           python --version
+
+          echo "Step 0: verify private key exported"
+          head -5 /tmp/rsa_key.p8
+
           echo "Step 1: Installing schemachange"
           pip install schemachange
           
