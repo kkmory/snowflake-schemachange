@@ -19,11 +19,12 @@ jobs:
         with:
           python-version: 3.8.x
 
-      - name: save private-key to file
+      - name: Save private-key to file
         env:
           SF_PRIVATE_KEY: ${{ secrets.SF_PRIVATE_KEY }}
         run: |
-            echo $SF_PRIVATE_KEY >> /tmp/rsa_key.p8
+            echo "$SF_PRIVATE_KEY" >> /tmp/rsa_key.p8
+        shell: bash
 
       - name: Run schemachange
         env:
