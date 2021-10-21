@@ -2,7 +2,7 @@
 
 try https://github.com/Snowflake-Labs/schemachange
 
-## Setup
+## Setup (if you run local pc)
 
 python 3.7+
 
