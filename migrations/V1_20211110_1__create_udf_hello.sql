@@ -1,3 +1,5 @@
+USE SCHEMA ETL
+
 create function area_of_circle(radius float)
   returns float
   as
